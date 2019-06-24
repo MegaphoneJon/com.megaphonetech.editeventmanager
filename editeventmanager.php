@@ -5,7 +5,7 @@ use CRM_Editeventmanager_ExtensionUtil as E;
 
 function editeventmanager_civicrm_buildForm($formName, &$form) {
   if ($form->getAction() == CRM_Core_Action::ADD || $form->getAction() == CRM_Core_Action::UPDATE) {
-    if (CRM_Core_Permission::check('edit all events')) {
+    if ($formName == 'CRM_Event_Form_ManageEvent_EventInfo' && CRM_Core_Permission::check('edit all events')) {
       $form->addEntityRef('created_id', ts('Event Manager'), ['placeholder' => ('- You -')]);
       CRM_Core_Region::instance('form-body')->add(['template' => 'CRM/Event/Form/ManageEventSnippet.tpl']);
       CRM_Core_Resources::singleton()->addScriptFile('com.megaphonetech.editeventmanager', 'js/editeventmanager.js');
